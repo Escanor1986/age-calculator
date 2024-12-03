@@ -1,0 +1,143 @@
+:root {
+  /* Font */
+  --font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  /* Primary Colors */
+  --color-purple: hsl(259, 100%, 65%);
+  --color-light-red: hsl(0, 100%, 67%);
+
+  /* Neutral Colors */
+  --color-white: hsl(0, 0%, 100%);
+  --color-off-white: hsl(0, 0%, 94%);
+  --color-light-grey: hsl(0, 0%, 86%);
+  --color-smokey-grey: hsl(0, 1%, 44%);
+  --color-off-black: hsl(0, 0%, 8%);
+
+  /* Typography */
+  --font-size-input: 32px;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+
+  /* Spacing */
+  --spacing-large: 48px;
+  --spacing-medium: 32px;
+  --spacing-small: 10px;
+
+  /* Borders */
+  --border-radius: 8px;
+
+  /* Shadows */
+  --border-color: rgba(0, 0, 0, 0.1);
+
+  /* General */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  line-height: 1.5;
+  font-weight: var(--font-weight-regular);
+  background-color: var(--color-off-white);
+  color: var(--color-smokey-grey);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 840px;
+  max-height: 651px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#form-container {
+  display: flex;
+  max-width: 728px;
+  flex-grow: 1;
+  padding: 0 0 var(--spacing-large) 0;
+  margin: 0 0 100px 0;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+#form {
+  display: flex;
+}
+
+#form > span {
+  display: flex;
+  flex-direction: column;
+  max-width: 160px;
+}
+
+#form > span:nth-child(1),
+#form > span:nth-child(2) {
+  margin-right: var(--spacing-medium);
+}
+
+#form > span > input {
+  margin: 0 0 var(--spacing-small) 0;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-input);
+  max-width: 160px;
+  max-height: 72px;
+}
+
+#form > span > input::placeholder {
+  color: var(--color-smokey-grey);
+  font-weight: var(--font-weight-bold);
+}
+
+#form > span > label {
+  color: var(--color-smokey-grey);
+  margin: 0 0 5px 0;
+  align-self: flex-start;
+  font-weight: var(--font-weight-bold);
+}
+
+#form > button {
+  border: none;
+}
+
+#svg-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+}
+
+#svg-wrapper svg {
+  position: relative;
+  display: block;
+}
+
+#submit-button {
+  width: 46px;
+  height: 46px;
+  background: url('public/assets/images/icon-arrow.svg') no-repeat center center;
+  border-radius: 50%;
+  border: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
