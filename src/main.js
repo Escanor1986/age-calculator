@@ -1,5 +1,5 @@
 import './style.css';
-import viteLogo from '/vite.svg';
+import formDate from './scripts/dateForm';
 
 document.querySelector('#app').innerHTML = `
 
@@ -20,14 +20,36 @@ document.querySelector('#app').innerHTML = `
     
     <div id="svg-wrapper">
       <svg width="100" height="100">
-        <circle cx="50" cy="50" r="40" stroke="#854DFF" fill="#854DFF" />
+        <circle cx="50" cy="50" r="40" stroke="#e6e6e6" fill="#7368b6" />
       </svg>
       <button type="submit" id="submit-button" aria-label="Submit"></button>
     </div>
   </form>
 </section>
-  <div class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-      Coded by <a href="https://github.com/Escanor1986" target="_blank">Escanor1986</a>.
+<section id="form-result">
+  <div class="result-item">
+    <span id="result-year">test</span>
+    <p>years</p>
   </div>
+  <div class="result-item">
+    <span id="result-month">test</span>
+    <p>months</p>
+  </div>
+  <div class="result-item">
+    <span id="result-day">test</span>
+    <p>days</p>
+  </div>
+</section>     
+
+<div class="attribution">
+  Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+  Coded by <a href="https://github.com/Escanor1986" target="_blank">Escanor1986</a>.
+</div>
+
 `;
+
+try {
+  formDate();
+} catch (e) {
+  console.log(e);
+}
