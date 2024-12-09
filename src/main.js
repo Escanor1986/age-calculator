@@ -1,21 +1,22 @@
 import './style.css';
 import formDate from './scripts/dateForm';
 
-document.querySelector('#app').innerHTML = `
+async function displayDOM() {
+	const data = (document.querySelector('#app').innerHTML = `
 
   <section id="form-container">
   <form id="form" autocomplete="on">
     <span>
       <label for="day">DAY</label>
-      <input type="text" id="day" name="day" placeholder="DD" aria-label="Day" />
+      <input type="text" id="day" name="day" placeholder="DD" aria-label="Day" maxlength="2" pattern="[0-9]{2}" title="Veuillez entrer deux chiffres." />
     </span>
     <span>
       <label for="month">MONTH</label>
-      <input type="text" id="month" name="month" placeholder="MM" aria-label="Month" />
+      <input type="text" id="month" name="month" placeholder="MM" aria-label="Month" maxlength="2" pattern="[0-9]{2}" title="Veuillez entrer deux chiffres." />
     </span>
     <span>
       <label for="year">YEAR</label>
-      <input type="text" id="year" name="year" placeholder="YYYY" aria-label="Year" />
+      <input type="text" id="year" name="year" placeholder="YYYY" aria-label="Year" maxlength="4" pattern="[0-9]{4}" title="Veuillez entrer quatre chiffres." />
     </span>
     
     <div id="svg-wrapper">
@@ -46,10 +47,15 @@ document.querySelector('#app').innerHTML = `
   Coded by <a href="https://github.com/Escanor1986" target="_blank">Escanor1986</a>.
 </div>
 
-`;
+`);
+
+	return data;
+}
+
+await displayDOM();
 
 try {
-  formDate();
+	formDate();
 } catch (e) {
-  console.log(e);
+	console.log(e);
 }
