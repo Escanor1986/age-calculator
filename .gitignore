@@ -22,6 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.quokka
 
 # Avoid accidental upload of the Sketch and Figma design files
 #####################################################
