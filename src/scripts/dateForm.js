@@ -1,4 +1,4 @@
-export default function formDate() {
+export default async function formDate() {
 	function debounce(func, delay) {
 		let timeout;
 		return function (...args) {
@@ -7,31 +7,67 @@ export default function formDate() {
 		};
 	}
 
-	let dateParams = {
-		day: 10,
-		month: 10,
-		year: 2000,
+	const isObjectEmpty = object => {
+		return Object.keys(object).length === 0 && object.contructor === Object;
 	};
 
+	let dateParams = {};
+
+	// Sélection des inputs
 	const dayInput = document.querySelector('#day');
-	if (dayInput) {
-		dayInput.addEventListener(
+	const monthInput = document.querySelector('#month');
+	const yearInput = document.querySelector('#year');
+
+	let domInputs = [];
+
+	if (dayInput && monthInput && yearInput) {
+		domInputs.push(dayInput, monthInput, yearInput);
+	}
+
+	// Sélection des spans pour l'affichage des erreurs potentielles
+	const dayErrorSpans = document.querySelector('#day + span.error');
+	const monthErrorSpans = document.querySelector('#month + span.error');
+	const yearErrorSpans = document.querySelector('#year + span.error');
+
+	let errorSpans = [];
+
+	if (dayErrorSpans, monthErrorSpans, yearErrorSpans) {
+		errorSpans.push(dayErrorSpans, monthErrorSpans, yearErrorSpans);
+	}
+
+	console.log(
+		domInputs[0].value.length === 0,
+		domInputs[0].validity.valid,
+		domInputs[0]
+	);
+
+	for (let i = 0; i < domInputs.length; i++) {
+		domInputs[i].addEventListener(
 			'input',
 			debounce(event => {
-				let day = event.target.value;
-				if (day.length <= 2) {
-					dateParams.day = parseInt(day, 10);
-					console.log(`Jour : ${dateParams.day}`);
-				} else {
-					return;
+				if (domInputs[i].id === 'day') {
+					try {
+						let day = event.target.value;
+						if (day.length <= 2) {
+							dateParams.day = parseInt(day, 10);
+							console.log(`Jour : ${dateParams.day}`);
+						} else {
+							return;
+						}
+					} catch (e) {
+						// Gestion personnalisée des différents types d'erreurs
+						throw new Error(e => {
+							if (domInputs[i].validity.valid) {
+								errorSpans[i].textContent = "";
+								errorSpans[i].className = "error";
+							}
+						});
+					}
 				}
 			}, 500)
 		);
-	} else {
-		console.error('Élément avec l\'ID "day" non trouvé.');
 	}
 
-	const monthInput = document.querySelector('#month');
 	if (monthInput) {
 		monthInput.addEventListener(
 			'input',
@@ -49,7 +85,6 @@ export default function formDate() {
 		console.error('Élément avec l\'ID "month" non trouvé.');
 	}
 
-	const yearInput = document.querySelector('#year');
 	if (yearInput) {
 		yearInput.addEventListener(
 			'input',
@@ -81,6 +116,10 @@ export default function formDate() {
 			event.stopPropagation();
 			console.log('Date actuelle :', today);
 			console.log('Paramètres de date soumis :', dateParams);
+
+			if (isObjectEmpty(dateParams)) {
+			}
+
 			try {
 				dateOfBirth = new Date(
 					dateParams.year,

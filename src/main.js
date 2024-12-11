@@ -5,18 +5,21 @@ async function displayDOM() {
 	const data = (document.querySelector('#app').innerHTML = `
 
   <section id="form-container">
-  <form id="form" autocomplete="on">
+  <form id="form" autocomplete="on" novalidate>
     <span>
-      <label for="day">DAY</label>
+      <label class="error" aria-live="polite" for="day">DAY</label>
       <input type="text" id="day" name="day" placeholder="DD" aria-label="Day" maxlength="2" pattern="[0-9]{2}" title="Veuillez entrer deux chiffres." />
+      <span class="error" aria-live="polite"></span>
     </span>
     <span>
-      <label for="month">MONTH</label>
+      <label class="error" aria-live="polite" for="month">MONTH</label>
       <input type="text" id="month" name="month" placeholder="MM" aria-label="Month" maxlength="2" pattern="[0-9]{2}" title="Veuillez entrer deux chiffres." />
+      <span class="error" aria-live="polite"></span>
     </span>
     <span>
-      <label for="year">YEAR</label>
+      <label class="error" aria-live="polite" for="year">YEAR</label>
       <input type="text" id="year" name="year" placeholder="YYYY" aria-label="Year" maxlength="4" pattern="[0-9]{4}" title="Veuillez entrer quatre chiffres." />
+      <span class="error" aria-live="polite"></span>
     </span>
     
     <div id="svg-wrapper">
@@ -55,7 +58,7 @@ async function displayDOM() {
 await displayDOM();
 
 try {
-	formDate();
+	await formDate();
 } catch (e) {
 	console.log(e);
 }
