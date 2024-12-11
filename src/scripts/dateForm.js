@@ -24,17 +24,6 @@ export default async function formDate() {
 		domInputs.push(dayInput, monthInput, yearInput);
 	}
 
-	// Sélection des spans pour l'affichage des erreurs potentielles
-	const dayErrorSpans = document.querySelector('#day + span.error');
-	const monthErrorSpans = document.querySelector('#month + span.error');
-	const yearErrorSpans = document.querySelector('#year + span.error');
-
-	let errorSpans = [];
-
-	if (dayErrorSpans, monthErrorSpans, yearErrorSpans) {
-		errorSpans.push(dayErrorSpans, monthErrorSpans, yearErrorSpans);
-	}
-
 	console.log(
 		domInputs[0].value.length === 0,
 		domInputs[0].validity.valid,
@@ -45,66 +34,44 @@ export default async function formDate() {
 		domInputs[i].addEventListener(
 			'input',
 			debounce(event => {
-				if (domInputs[i].id === 'day') {
-					try {
-						let day = event.target.value;
-						if (day.length <= 2) {
-							dateParams.day = parseInt(day, 10);
-							console.log(`Jour : ${dateParams.day}`);
-						} else {
-							return;
-						}
-					} catch (e) {
-						// Gestion personnalisée des différents types d'erreurs
-						throw new Error(e => {
-							if (domInputs[i].validity.valid) {
-								errorSpans[i].textContent = "";
-								errorSpans[i].className = "error";
-							}
-						});
+				try {
+					const inputId = domInputs[i].id;
+					let value = event.target.value;
+					if (inputId === 'day' && value.length <= 2) {
+						dateParams.day = parseInt(value, 10);
+						console.log(`Jour : ${dateParams.day}`);
+					} else if (inputId === 'month' && value.length <= 2) {
+						dateParams.month = parseInt(value, 10);
+						console.log(`Mois : ${dateParams.month}`);
+					} else if (inputId === 'year' && value.length <= 4) {
+						dateParams.year = parseInt(value, 10);
+						console.log(`Année : ${dateParams.year}`);
 					}
+				} catch (e) {
+					console.error(
+						`Erreur sur l'ID «${domInputs[i]?.id}»; Erreur:`,
+						e
+					);
 				}
 			}, 500)
 		);
 	}
 
-	if (monthInput) {
-		monthInput.addEventListener(
-			'input',
-			debounce(event => {
-				let month = event.target.value;
-				if (month.length <= 2) {
-					dateParams.month = parseInt(month, 10);
-					console.log(`Mois : ${dateParams.month}`);
-				} else {
-					return;
-				}
-			}, 500)
-		);
-	} else {
-		console.error('Élément avec l\'ID "month" non trouvé.');
-	}
+	// Sélection des spans pour l'affichage des erreurs potentielles
+	const dayErrorSpans = document.querySelector('#day + span.error');
+	const monthErrorSpans = document.querySelector('#month + span.error');
+	const yearErrorSpans = document.querySelector('#year + span.error');
 
-	if (yearInput) {
-		yearInput.addEventListener(
-			'input',
-			debounce(event => {
-				let year = event.target.value;
-				if (year.length <= 4) {
-					dateParams.year = parseInt(year, 10);
-					console.log(`Année : ${dateParams.year}`);
-				} else {
-					return;
-				}
-			}, 500)
-		);
-	} else {
-		console.error('Élément avec l\'ID "year" non trouvé.');
+	let errorSpans = [];
+
+	if ((dayErrorSpans, monthErrorSpans, yearErrorSpans)) {
+		errorSpans.push(dayErrorSpans, monthErrorSpans, yearErrorSpans);
 	}
 
 	let dateOfBirth;
 	const today = new Date();
 
+	// Sélection des spans pour l'affichage des résultats
 	const resultDay = document.querySelector('#result-day');
 	const resultMonth = document.querySelector('#result-month');
 	const resultYear = document.querySelector('#result-year');
