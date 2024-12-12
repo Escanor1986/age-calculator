@@ -1,7 +1,7 @@
 import './style.css';
 import formDate from './scripts/dateForm';
 
-async function displayDOM() {
+function displayDOM() {
 	const data = (document.querySelector('#app').innerHTML = `
 
   <section id="form-container">
@@ -55,10 +55,10 @@ async function displayDOM() {
 	return data;
 }
 
-await displayDOM();
+displayDOM();
 
 try {
-	await formDate();
+	formDate();
 } catch (e) {
 	console.log(e);
 }

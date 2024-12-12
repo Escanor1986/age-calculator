@@ -1,4 +1,4 @@
-export default async function formDate() {
+export default function formDate() {
 	function debounce(func, delay) {
 		let timeout;
 		return function (...args) {
